@@ -3,7 +3,8 @@
 #define MAX 100
 using namespace std;
 int sl = 7;
-//================ khu vuc khai bao nguyen mau ham ============
+
+
 void ve_tuong_tren();
 void ve_tuong_duoi();
 void ve_tuong_phai();
@@ -21,16 +22,14 @@ bool kt_ran(int toadox[], int toadoy[]);
 void tao_qua(int &xqua, int &yqua, int toadox[], int toadoy[]);
 bool kt_ran_de_qua(int xqua, int yqua, int toadox[], int toadoy[]);
 bool kt_ran_an_qua(int xqua, int yqua, int x0, int y0);
-//============= ham main - xu ly chinh ==============
+
 int main()
 {
-	//---------------
 	bool gameover = false;
 	int toadox[MAX], toadoy[MAX];
 	ve_tuong();
 	khoi_tao_ran(toadox, toadoy);
 	ve_ran(toadox, toadoy);
-	//===================== kiem tra va tao qua ==============
 	srand(time(NULL));
 	int xqua = 0, yqua = 0;
 	//tao qua
@@ -96,14 +95,14 @@ int main()
 	_getch();
 	return 0;
 }
-//============ khu vuc dinh nghia ham =============
+
 void ve_tuong_tren()
 {
 	int x = 10, y = 1;
 	while (x <= 100)
 	{
 		gotoXY(x, y);
-		cout << "+";
+		cout << "#";
 		x++;
 	}
 }
@@ -113,7 +112,7 @@ void ve_tuong_duoi()
 	while (x <= 100)
 	{
 		gotoXY(x, y);
-		cout << "+";
+		cout << "#";
 		x++;
 	}
 }
@@ -123,7 +122,7 @@ void ve_tuong_phai()
 	while (y <= 26)
 	{
 		gotoXY(x, y);
-		cout << "+";
+		cout << "#";
 		y++;
 	}
 }
@@ -133,7 +132,7 @@ void ve_tuong_trai()
 	while (y <= 26)
 	{
 		gotoXY(x, y);
-		cout << "+";
+		cout << "#";
 		y++;
 	}
 }
@@ -181,12 +180,11 @@ void xoa_du_lieu_cu(int toadox[], int toadoy[])
 }
 void xu_ly_ran(int toadox[], int toadoy[], int x, int y,int &xqua,int &yqua)
 {
-	//b1: them toa do moi vao dau mang
+
 	them(toadox, x);
 	them(toadoy, y);
 	if (kt_ran_an_qua(xqua, yqua, toadox[0], toadoy[0]) == false)
 	{
-		//b2: xoa toa do cuoi mang
 		xoa(toadox, sl - 1);
 		xoa(toadoy, sl - 1);
 
@@ -195,7 +193,6 @@ void xu_ly_ran(int toadox[], int toadoy[], int x, int y,int &xqua,int &yqua)
 	{
 		tao_qua(xqua, yqua, toadox, toadoy);
 	}
-	//b3: ve ran
 	ve_ran(toadox, toadoy);
 }
 void them(int a[], int x)
@@ -217,25 +214,21 @@ void xoa(int a[], int vt)
 }
 bool kt_ran_cham_tuong(int x0,int y0)
 {
-	//ran cham tuong tren
 	if (y0 == 1 && (x0 >= 10 && x0 <= 100))
 	{
-		return true;//gameover
+		return true;
 	}
-	//ran cham tuong duoi
 	else if (y0 == 26 && (x0 >= 10 && x0 <= 100))
 	{
-		return true;//gameover
+		return true;
 	}
-	//ran cham tuong phai
 	else if (x0 == 100 && (y0 >= 1 && y0 <= 26))
 	{
-		return true;//gameover
+		return true;
 	}
-	//ran cham tuong trai
 	else if (x0 == 10 && (y0 >= 1 && y0 <= 26))
 	{
-		return true;//gameover
+		return true;
 	}
 	return false;
 }
@@ -245,18 +238,18 @@ bool kt_ran_cham_duoi(int toadox[],int toadoy[])
 	{
 		if ((toadox[0] == toadox[i]) && (toadoy[0] == toadoy[i]))
 		{
-			return true;//gameover
+			return true;
 		}
 	}
 	return false;
 }
 bool kt_ran(int toadox[],int toadoy[])
 {
-	bool kt1 = kt_ran_cham_duoi(toadox, toadoy);//gameover = true
-	bool kt2 = kt_ran_cham_tuong(toadox[0], toadoy[0]);//gameover = false
+	bool kt1 = kt_ran_cham_duoi(toadox, toadoy);
+	bool kt2 = kt_ran_cham_tuong(toadox[0], toadoy[0]);
 	if (kt1 == true || kt2 == true)
 	{
-		return true;//gameover
+		return true;
 	}
 	return false;
 }
@@ -264,16 +257,14 @@ void tao_qua(int &xqua,int &yqua,int toadox[],int toadoy[])
 {
 	do
 	{
-		//11 <= xqua <= 99
 		xqua = rand() % (99 - 11 + 1) + 11;
-		//2 <= yqua <= 25
 		yqua = rand() % (25 - 2 + 1) + 2;
 	} while (kt_ran_de_qua(xqua,yqua,toadox,toadoy)==true);
 	int i = rand() % (15 - 1 + 1) + 1;
 	SetColor(i);
 	gotoXY(xqua, yqua);
-	cout << "$";
-	SetColor(7);//mau trang
+	cout << "*";
+	SetColor(7);
 }
 bool kt_ran_de_qua(int xqua, int yqua, int toadox[], int toadoy[])
 {
@@ -281,7 +272,7 @@ bool kt_ran_de_qua(int xqua, int yqua, int toadox[], int toadoy[])
 	{
 		if ((xqua == toadox[i]) && (yqua == toadoy[i]))
 		{
-			return true;//ran de len qua
+			return true;
 		}
 	}
 	return false;
@@ -290,7 +281,7 @@ bool kt_ran_an_qua(int xqua, int yqua, int x0,int y0)
 {
 	if ((x0 == xqua) && (y0 == yqua))
 	{
-		return true;//ran an qua
+		return true;
 	}
 	return false;
 }
